@@ -30,20 +30,23 @@ const estanteria = {
     leido: false
 }],
     log() {
-    const { libros } = this;
-    let resultado = ''
-    for (const libro of libros) {
-    const prefijo = libro. leido ? 'Ya has' : 'Aun no has';
-    resultado = `${resultado} ${prefijo} leído ${libro.nombre} de ${libro.autor}`
+    for (const libro of this.libros) {
+      const prefijo = libro.leido ? 'Ya has' : 'Aun no has';
+      console.log(`${prefijo} leído ${libro.nombre} de ${libro.autor}`);
     }
-    console. log(resultado)
     },
     sugerencia() {
-    const librosNoLeidos = this.libros.filter(libro => !libro. leido)
-    const indiceRandom = Math. floor(librosNoLeidos. length * Math. random( ) )
-    const elementoRandom = librosNoLeidos [indiceRandom]
-    console. log('Te sugiero ${elementoRandom. nombre} de ${elementoRandom. autor}')
+    const librosNoLeidos = this.libros.filter(libro => !libro.leido);
+    if (librosNoLeidos.length === 0) {
+      console.log("¡Ya has leído todos los libros!");
+      return;
+    }
+    const indiceRandom = Math.floor(Math.random() * librosNoLeidos.length);
+    const libroSugerido = librosNoLeidos[indiceRandom];
+    console.log(`Te sugiero ${libroSugerido.nombre} de ${libroSugerido.autor}`);
     }
 }
+
+//Verificacion
 estanteria. log()
 estanteria. sugerencia()
